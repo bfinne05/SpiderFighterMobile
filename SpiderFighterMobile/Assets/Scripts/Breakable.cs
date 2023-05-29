@@ -4,36 +4,22 @@ using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
-    public bool hasParticleSystem;
+    public bool hasParticleSystem; 
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (transform.rotation.eulerAngles.magnitude < 0.0f)
+        if (collision.gameObject.CompareTag("Player")) 
         {
-            if (Mathf.Approximately(GetComponent<Rigidbody>().velocity.magnitude, 0.0f))
+            if (hasParticleSystem)
             {
-                if (hasParticleSystem)
-                {
-                    CreateParticleSystem();
-                }
-                Destroy(gameObject);
+                CreateParticleSystem();
             }
-        }
-        else
-        {
             Destroy(gameObject);
         }
     }
 
     void CreateParticleSystem()
     {
-        // Code to create and configure the particle system goes here
+        
     }
 }
